@@ -13,12 +13,12 @@ export default function Details({ route, navigation }) {
 
     useEffect(() => {
         Fetch(url, dataResult, setDataResult, setMessage, loading, setLoading)
-    }, [])
-console.log(data);
+    }, [data])
+    // console.log(dataResult);
     return (
         <ScrollView style={{ flex: 1, backgroundColor: 'black' }}>
             {/* Top */}
-            <View style={{padding:10, flex: 1, backgroundColor: 'black', borderBottomColor: 'white', borderBottomWidth: 1, paddingBottom: 10, flexDirection: 'row' }}>
+            <View style={{ padding: 10, flex: 1, backgroundColor: 'black', borderBottomColor: 'white', borderBottomWidth: 1, paddingBottom: 10, flexDirection: 'row' }}>
                 <Image
                     style={{ marginRight: 20, width: 80, height: 115, }}
                     source={{
@@ -36,6 +36,8 @@ console.log(data);
             <View style={{ flex: 1, height: 300, justifyContent: 'center', alignItems: 'center' }}>
                 {loading ? <Text>Loading...</Text> :
                     <Video
+                        isPlaying={true}
+                        isLoaded={true}
                         style={{ justifyContent: 'center', alignItems: 'center', flex: 1, alignSelf: 'stretch' }}
                         source={{ uri: dataResult[0].previewUrl }}
                         useNativeControls
