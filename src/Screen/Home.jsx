@@ -4,11 +4,11 @@ import Fetch from '../Hooks/Fetch'
 import { Icon } from 'react-native-elements'
 
 export default function Home({ navigation }) {
-    const url = 'https://itunes.apple.com/search?term=marvel&entity=movie&limit=4'
-    const [limit, setLimit] = useState(2)
+    const [limit, setLimit] = useState(25)
     const [data, setData] = useState([])
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
+    const url = `https://itunes.apple.com/search?term=marvel&entity=movie&limit=${limit}`
 
     useEffect(() => {
         Fetch(url, data, setData, setMessage, loading, setLoading)
@@ -26,7 +26,7 @@ export default function Home({ navigation }) {
             <View>
                 <Text style={{ fontWeight: 'bold', width: 190, overflow: 'hidden', flexWrap: 'nowrap' }} >{item.trackName}</Text>
                 <Text>{item.primaryGenreName}</Text>
-                <Text style={{ fontWeight: 'bold' }}>{new Date(item.releaseDate).toDateString()}</Text>
+                <Text style={{ fontWeight: 'bold' }}>{new Date(item.releaseDate).toDateString().split(' ').slice(1).join(' ')}</Text>
             </View>
             <Icon name="chevron-forward-outline"
                 type='ionicon'
@@ -40,7 +40,6 @@ export default function Home({ navigation }) {
                 data={data}
                 renderItem={renderItem}
             />
-            <Text>Home</Text>
         </View>
     )
 }
